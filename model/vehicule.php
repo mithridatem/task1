@@ -3,12 +3,14 @@
     class Vehicule{
         private $id_vehicule;
         private $nom_vehicule;
-        private $prix_ht_vehicule;
+        private $color;
+        private $nbrRoue;
+        
 
-        public function __contruct($nom, $prix){
-            $this->nom_vehicule = $nom;
-            $this->prix_ht_vehicule = $prix;
-
+        public function __contruct($nom_vehicule, $color, $nbrRoue){
+            $this->nom_vehicule = $nom_vehicule;
+            $this->color = $color;
+            $this->$nbrRoue = $nbrRoue;
         }
         //getter and setter
 

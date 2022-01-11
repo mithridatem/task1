@@ -1,46 +1,45 @@
 <?php
+    //json error
+    $tab = array(
+        'error' => 'Pas de Json',);
     //test si le paramétre task existe
     if(isset($_GET['task'])){
-        $tab = array(
-            'error' => 'Pas de Json',);
-            print_r('{"error" : "'.$tab['error'].'"}');
         //test si le paramétre task existe et égale 1
         if($_GET['task']==1){
-            
+            //test si date deb et end existe task filter date (deb à end)
             if(isset($_GET['deb']) and isset($_GET['end'])){
                 $deb = $_GET['deb'];
                 $end = $_GET['end'];
                 //affiche json (de deb à end)
                 echo json_encode(reqDate($deb, $end)) ;
             }
+            //test affiche toutes les taches
             else{
                 //affiche json toutes les taches
                 echo json_encode(req()) ;
             }
         }
-        else if($_GET['task'] >1){
-            $tab = array(
-            'error' => 'Pas de Json',);
+        //sinon affiche json error
+        else{
+            //affichage json
             print_r('{"error" : "'.$tab['error'].'"}');
         }
     }
     //test si le paramétre user existe
     else if(isset($_GET['user'])){
-        //affiche json toutes les utilisateurs
+        //affiche json tous les utilisateurs
         echo json_encode(reqUser()) ;
     }
     //test si le paramétre cat existe
     else if(isset($_GET['cat'])){
-        //affiche json toutes les utilisateurs
+        //affiche json toutes les catégories
         echo json_encode(reqCat()) ;
     }
+    //sinon affiche json error
     else{
-        $tab = array(
-        'error' => 'Pas de Json',);
         print_r('{"error" : "'.$tab['error'].'"}');
     }
-    
-    //fonction création de la requéte et exécution retourne une Arraylist
+    //fonction création de la requéte et exécution retourne une Arraylist all task
     function req()
     {
         try 
@@ -63,8 +62,7 @@
         //retourne une Arraylist
         return $output;
     }
-
-    //fonction création de la requéte et exécution retourne une Arraylist
+    //fonction création de la requéte et exécution retourne une Arraylist all user
     function reqUser()
     {
         try 
@@ -87,7 +85,7 @@
         //retourne une Arraylist
         return $output;
     }
-    //fonction création de la requéte et exécution retourne une Arraylist
+    //fonction création de la requéte et exécution retourne une Arraylist all cat
     function reqCat()
     {
         try 
@@ -110,9 +108,7 @@
         //retourne une Arraylist
         return $output;
     }
-
-
-    //fonction création de la requéte et exécution retourne une Arraylist
+    //fonction création de la requéte et exécution retourne une Arraylist task filter
     function reqDate($deb, $end)
     {
         try 
