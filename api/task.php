@@ -1,4 +1,5 @@
 <?php
+    header("Access-Control-Allow-Origin: *");
     //json error
     $tab = array(
         'error' => 'Pas de Json',);
@@ -11,12 +12,12 @@
                 $deb = $_GET['deb'];
                 $end = $_GET['end'];
                 //affiche json (de deb à end)
-                echo json_encode(reqDate($deb, $end)) ;
+                echo json_encode(reqTaskDate($deb, $end)) ;
             }
             //test affiche toutes les taches
             else{
                 //affiche json toutes les taches
-                echo json_encode(req()) ;
+                echo json_encode(reqAllTask()) ;
             }
         }
         //sinon affiche json error
@@ -40,16 +41,14 @@
         print_r('{"error" : "'.$tab['error'].'"}');
     }
     //fonction création de la requéte et exécution retourne une Arraylist all task
-    function req()
+    function reqAllTask()
     {
         try 
-        {   //connexion à la Base de données
-            //include('bddConnexion2.php');
-            //connexion à la base de données
-            $bdd = new PDO('mysql:host=localhost;dbname=task1', 'root','',);
+        {   
+            //connexion à la Base de données
+            include('../utils/connexionBdd.php');
             //requete SQL
             $requete = "SELECT * FROM task";
-
             // Execution de la requéte SQL.
             $reponse = $bdd->query($requete);
             //variable $output (Arraylist) contenant le résultat de la requéte
@@ -67,9 +66,7 @@
     {
         try 
         {   //connexion à la Base de données
-            //include('bddConnexion2.php');
-            //connexion à la base de données
-            $bdd = new PDO('mysql:host=localhost;dbname=task1', 'root','',);
+            include('../utils/connexionBdd.php');
             //requete SQL
             $requete = "SELECT * FROM user";
 
@@ -89,10 +86,9 @@
     function reqCat()
     {
         try 
-        {   //connexion à la Base de données
-            //include('bddConnexion2.php');
-            //connexion à la base de données
-            $bdd = new PDO('mysql:host=localhost;dbname=task1', 'root','',);
+        {   
+            //connexion à la Base de données
+            include('../utils/connexionBdd.php');
             //requete SQL
             $requete = "SELECT * FROM cat";
 
@@ -109,17 +105,15 @@
         return $output;
     }
     //fonction création de la requéte et exécution retourne une Arraylist task filter
-    function reqDate($deb, $end)
+    function reqTaskDate($deb, $end)
     {
         try 
-        {   //connexion à la Base de données
-            //include('bddConnexion2.php');
-            //connexion à la base de données
-            $bdd = new PDO('mysql:host=localhost;dbname=task1', 'root','',);
+        {   
+            //connexion à la Base de données
+            include('../utils/connexionBdd.php');
             //requete SQL
             $requete = "SELECT * FROM task WHERE validate_task = 0 AND 
             date_task BETWEEN $deb AND $end";
-
             // Execution de la requéte SQL.
             $reponse = $bdd->query($requete);
             //variable $output (Arraylist) contenant le résultat de la requéte

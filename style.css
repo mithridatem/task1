@@ -1,0 +1,17 @@
+body{
+    margin:0;
+    padding: 0;
+}
+p{
+    font-weight: lighter;
+}
+h2,p,h3{
+    padding-left: 10px;
+    font-family: Roboto;
+}
+span{
+    font-weight: bold;
+    font-family: Roboto;
+    font-size: 16px;
+    color: rgb(46, 46, 46);
+}
